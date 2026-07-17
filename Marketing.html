@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGF Wallet — Seed Growth Funds</title>
+    <style>
+        /* ===== SKYBLUE & WHITE THEME ===== */
+        :root {
+            --bg: #f0f8ff;
+            --bg2: #ffffff;
+            --text: #1a1a2e;
+            --text2: #4a6a8a;
+            --skyblue: #87CEEB;
+            --skyblue-dark: #00BFFF;
+            --skyblue-deep: #1e90ff;
+            --skyblue-glow: rgba(135, 206, 235, 0.2);
+            --border: #d0e8f0;
+            --radius: 16px;
+            --radius2: 10px;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            padding: 16px 0;
+            border-bottom: 3px solid var(--skyblue);
+            background: var(--bg2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo span { color: var(--skyblue-dark); }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--text2);
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .nav-links a:hover { color: var(--skyblue-dark); }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: var(--radius2);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: var(--skyblue-dark);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: var(--skyblue-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--skyblue-glow);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--skyblue-dark);
+            color: var(--skyblue-dark);
+        }
+        .btn-outline:hover {
+            background: var(--skyblue-dark);
+            color: #fff;
+        }
+
+        /* ===== SVG ICONS ===== */
+        .icon-svg {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 12px;
+            stroke: var(--skyblue-dark);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #87CEEB 0%, #00BFFF 50%, #1e90ff 100%);
+            color: #fff;
+            border-bottom: 4px solid #fff;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hero .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .hero h1 .highlight { text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
+
+        .hero .meaning {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.95);
+            max-width: 600px;
+            margin: 16px auto 32px;
+        }
+
+        .hero .cta-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-white {
+            background: #fff;
+            color: var(--skyblue-dark);
+            border: none;
+        }
+        .hero .btn-white:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .hero .btn-outline-white {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .hero .btn-outline-white:hover {
+            background: #fff;
+            color: var(--skyblue-dark);
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 60px 0;
+            background: var(--bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        .section-title span { color: var(--skyblue-dark); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            transition: 0.3s;
+            border-bottom: 4px solid var(--skyblue);
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 32px var(--skyblue-glow);
+            border-color: var(--skyblue-dark);
+        }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text2); }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            padding: 60px 0;
+            background: var(--bg2);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .step {
+            text-align: center;
+            background: var(--bg);
+            padding: 24px 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        .step:hover { border-color: var(--skyblue-dark); box-shadow: 0 8px 32px var(--skyblue-glow); }
+
+        .step .num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--skyblue-dark);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 auto 12px;
+        }
+        .step h4 { font-size: 1rem; margin-bottom: 6px; }
+        .step p { font-size: 0.85rem; color: var(--text2); }
+
+        /* ===== CALCULATOR ===== */
+        .calculator {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #87CEEB 0%, #00BFFF 50%, #1e90ff 100%);
+            color: #fff;
+        }
+
+        .calculator .section-title { color: #fff; }
+        .calculator .section-title span { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
+
+        .calc-box {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .calc-box label { font-weight: 600; color: #fff; display: block; margin-bottom: 8px; }
+
+        .calc-box input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius2);
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            margin: 8px 0 16px;
+        }
+        .calc-box input:focus { border-color: #fff; }
+
+        .calc-result {
+            font-size: 1.1rem;
+            padding: 16px;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .calc-result .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .calc-result .sub { color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+
+        /* ===== APP STORE BADGES ===== */
+        .app-badges {
+            padding: 40px 0;
+            background: var(--bg2);
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .app-badges .sub {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .app-badges .badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .app-badges .badge-img {
+            height: 50px;
+            width: auto;
+            transition: 0.3s;
+        }
+        .app-badges .badge-img:hover {
+            transform: translateY(-4px);
+        }
+
+        /* ===== FAQ ===== */
+        .faq {
+            padding: 60px 0;
+            background: var(--bg);
+        }
+
+        .faq-list { max-width: 700px; margin: 0 auto; }
+
+        .faq-item {
+            background: var(--bg2);
+            padding: 16px 20px;
+            border-radius: var(--radius2);
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+        .faq-item:hover { border-color: var(--skyblue-dark); }
+
+        .faq-item .q {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item .q:hover { color: var(--skyblue-dark); }
+        .faq-item .a {
+            padding-top: 8px;
+            color: var(--text2);
+            display: none;
+        }
+        .faq-item.open .a { display: block; }
+        .faq-item .toggle {
+            font-size: 1.2rem;
+            color: var(--skyblue-dark);
+            font-weight: 700;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 40px 0 20px;
+            border-top: 3px solid var(--skyblue);
+            background: var(--bg2);
+            text-align: center;
+        }
+
+        .footer .links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .footer .links a {
+            color: var(--text2);
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .footer .links a:hover { color: var(--skyblue-dark); }
+        .footer .copy { font-size: 0.8rem; color: var(--text2); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.8rem; }
+            .btn { padding: 8px 16px; font-size: 0.8rem; }
+            .section-title { font-size: 1.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .header .container { flex-direction: column; gap: 8px; }
+            .hero { padding: 40px 0; }
+            .hero .cta-group { flex-direction: column; align-items: center; }
+            .calc-box { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo"> <span>SGF</span> Wallet</div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#calculator">Calculator</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://sgf-wallet.railway.app" class="btn btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO — SKYBLUE ===== -->
+    <section class="hero">
+        <div class="container">
+            <span class="badge"> Seed Growth Funds</span>
+            <span class="hero-icon"></span>
+            <h1>
+                Grow Your Money<br>
+                <span class="highlight">2% Every Day</span>
+            </h1>
+            <div class="meaning"> Seed  Growth  Funds</div>
+            <p>Your money earns daily growth with no trading required. Start earning from day one.</p>
+            <div class="cta-group">
+                <a href="https://sgf-wallet.railway.app" class="btn btn-white">Start Growing Now</a>
+                <a href="#how-it-works" class="btn btn-outline-white">Learn More </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why <span>SGF Wallet</span>?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                    <h3>2% Daily Growth</h3>
+                    <p>Your money earns every single day.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <polyline points="17 1 21 5 17 9"/>
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                        <polyline points="7 23 3 19 7 15"/>
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                    </svg>
+                    <h3>Free Transfers</h3>
+                    <p>Send money with zero fees.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                        <line x1="1" y1="10" x2="23" y2="10"/>
+                    </svg>
+                    <h3>Instant Withdrawals</h3>
+                    <p>To any bank.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <h3>2FA Security</h3>
+                    <p>Your account is protected.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <h3>Referral Bonuses</h3>
+                    <p>Earn when friends join.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                        <line x1="12" y1="18" x2="12.01" y2="18"/>
+                    </svg>
+                    <h3>Mobile-First</h3>
+                    <p>Works on any phone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It <span>Works</span></h2>
+            <div class="steps">
+                <div class="step"><div class="num">1</div><h4>Create Account</h4><p>Sign up in 2 minutes.</p></div>
+                <div class="step"><div class="num">2</div><h4>Deposit Funds</h4><p>Transfer to your virtual account.</p></div>
+                <div class="step"><div class="num">3</div><h4>Watch It Grow</h4><p>Your balance grows every single day.</p></div>
+                <div class="step"><div class="num">4</div><h4>Withdraw Anytime</h4><p>Transfer to your bank instantly.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CALCULATOR ===== -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <h2 class="section-title">See Your <span>Growth</span></h2>
+            <div class="calc-box">
+                <label>Enter Amount ()</label>
+                <input type="number" id="calcAmount" value="10000" min="100" step="100">
+                <div class="calc-result">
+                    <div>After 30 Days</div>
+                    <div class="amount" id="calcResult">18,113</div>
+                    <div class="sub">That's <span id="calcPercent">81%</span> growth! </div>
+                </div>
+                <div style="margin-top:12px;font-size:0.8rem;color:rgba(255,255,255,0.7);">
+                    2% daily growth on principal
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== APP STORE BADGES ===== -->
+    <section class="app-badges">
+        <div class="container">
+            <div class="sub"> BYE FEES. HI VIRTUAL ACCOUNT.</div>
+            <div class="badges">
+                <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px;">
+                    <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
+                    <text x="60" y="55" font-family="Arial" font-size="24" fill="#ffffff" font-weight="bold">GET IT ON</text>
+                    <text x="50" y="100" font-family="Arial" font-size="32" fill="#ffffff" font-weight="bold">Google Play</text>
+                    <polygon points="35,30 45,50 25,50" fill="#ffffff"/>
+                    <polygon points="35,120 45,100 25,100" fill="#ffffff"/>
+                    <rect x="20" y="45" width="30" height="60" fill="#ffffff" rx="4"/>
+                    <circle cx="35" cy="45" r="5" fill="#0a0a0a"/>
+                </svg>
+
+                <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px;">
+                    <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
+                    <text x="60" y="55" font-family="Arial" font-size="20" fill="#ffffff" font-weight="bold">Download on the</text>
+                    <text x="50" y="100" font-family="Arial" font-size="36" fill="#ffffff" font-weight="bold">App Store</text>
+                    <rect x="20" y="40" width="35" height="70" rx="8" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
+                    <circle cx="37.5" cy="50" r="5" fill="#0a0a0a"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="q"><span>What is SGF Wallet?</span><span class="toggle">+</span></div>
+                    <div class="a">SGF (Seed Growth Funds) Wallet is a savings and investment platform that helps you grow your money with 2% daily returns. You can deposit, transfer, and withdraw funds — all from your phone.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><span>How does the 2% daily growth work?</span><span class="toggle">+</span></div>
+                    <div class="a">Your principal balance earns 2% growth every single day. No trading, no hidden fees — just simple, transparent growth.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><span>Is my money safe?</span><span class="toggle">+</span></div>
+                    <div class="a">Yes! Your funds are held securely via Korapay, a licensed payment provider. We use 2FA, PIN protection, and encryption to keep your account secure.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><span>Can I withdraw anytime?</span><span class="toggle">+</span></div>
+                    <div class="a">Yes! You can withdraw your funds to any bank account anytime. A small 1.5% platform fee applies.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><span>How do I refer friends?</span><span class="toggle">+</span></div>
+                    <div class="a">Share your unique referral code. When your friend signs up and makes their first deposit, you earn 5% of their deposit as a bonus.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><span>Is SGF Wallet available on mobile?</span><span class="toggle">+</span></div>
+                    <div class="a">Yes! SGF Wallet is fully responsive and works on any smartphone. A dedicated mobile app is coming soon.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="links">
+                <a href="https://sgf-wallet.railway.app">App</a>
+                <a href="#features">Features</a>
+                <a href="#calculator">Calculator</a>
+                <a href="#faq">FAQ</a>
+                <a href="mailto:support@sgfwallet.com">Support</a>
+            </div>
+            <p class="copy"> SGF Wallet — Seed Growth Funds. Grow Your Money, 2% Every Day.</p>
+            <p class="copy" style="margin-top:4px;">© 2026 SGF Wallet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        const calcAmount = document.getElementById('calcAmount');
+        const calcResult = document.getElementById('calcResult');
+        const calcPercent = document.getElementById('calcPercent');
+
+        function calculateGrowth() {
+            const principal = parseFloat(calcAmount.value) || 0;
+            const days = 30;
+            const rate = 0.02;
+            let balance = principal;
+            for (let i = 0; i < days; i++) balance += balance * rate;
+            const percent = principal > 0 ? ((balance - principal) / principal * 100).toFixed(0) : 0;
+            calcResult.textContent = `${balance.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+            calcPercent.textContent = `${percent}%`;
+        }
+
+        calcAmount.addEventListener('input', calculateGrowth);
+        calculateGrowth();
+
+        document.querySelectorAll('.faq-item .q').forEach(q => {
+            q.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        console.log(' SGF Wallet — Seed Growth Funds. Skyblue Edition!');
+    </script>
+</body>
+</html>
