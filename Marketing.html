@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGF Wallet � Seed Growth Funds</title>
+    <title>SGF Wallet — Seed Growth Funds</title>
     <style>
-        /* ===== SKYBLUE & WHITE THEME ===== */
         :root {
-            --bg: #f0f8ff;
-            --bg2: #ffffff;
-            --text: #1a1a2e;
-            --text2: #4a6a8a;
             --skyblue: #87CEEB;
             --skyblue-dark: #00BFFF;
             --skyblue-deep: #1e90ff;
             --skyblue-glow: rgba(135, 206, 235, 0.2);
+            --bg: #f0f8ff;
+            --bg2: #ffffff;
+            --text: #1a1a2e;
+            --text2: #4a6a8a;
             --border: #d0e8f0;
             --radius: 16px;
             --radius2: 10px;
@@ -22,18 +21,38 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: var(--font);
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
-
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* ===== SVG ICONS ===== */
+        .icon-svg {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 8px;
+            stroke: var(--skyblue-dark);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .icon-svg.small {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+        .icon-svg.white {
+            stroke: #fff;
         }
 
         /* ===== HEADER ===== */
@@ -45,7 +64,6 @@
             top: 0;
             z-index: 100;
         }
-
         .header .container {
             display: flex;
             justify-content: space-between;
@@ -53,19 +71,20 @@
             flex-wrap: wrap;
             gap: 12px;
         }
-
         .logo {
             font-size: 1.4rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
         .logo span { color: var(--skyblue-dark); }
+        .logo svg { width: 28px; height: 28px; stroke: var(--skyblue-dark); stroke-width: 2; fill: none; }
 
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 16px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -74,8 +93,10 @@
             font-size: 0.9rem;
             transition: 0.3s;
             text-decoration: none;
+            cursor: pointer;
         }
         .nav-links a:hover { color: var(--skyblue-dark); }
+        .nav-links a.active { color: var(--skyblue-dark); font-weight: 600; }
 
         .btn {
             padding: 10px 24px;
@@ -107,28 +128,23 @@
             color: #fff;
         }
 
-        /* ===== SVG ICONS ===== */
-        .icon-svg {
-            display: inline-block;
-            width: 48px;
-            height: 48px;
-            margin-bottom: 12px;
-            stroke: var(--skyblue-dark);
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ===== HERO ===== */
         .hero {
-            padding: 80px 0 60px;
+            padding: 60px 0 40px;
             text-align: center;
             background: linear-gradient(135deg, #87CEEB 0%, #00BFFF 50%, #1e90ff 100%);
             color: #fff;
             border-bottom: 4px solid #fff;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 30px;
         }
-
         .hero .badge {
             display: inline-block;
             background: rgba(255,255,255,0.2);
@@ -140,301 +156,140 @@
             margin-bottom: 16px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .hero .hero-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
             display: block;
+            margin-bottom: 16px;
         }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 8px;
-            color: #fff;
+        .hero .hero-icon svg {
+            width: 64px;
+            height: 64px;
+            stroke: #fff;
+            stroke-width: 2;
+            fill: none;
         }
+        .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 8px; color: #fff; }
         .hero h1 .highlight { text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
-
-        .hero .meaning {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 8px;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.95);
-            max-width: 600px;
-            margin: 16px auto 32px;
-        }
-
-        .hero .cta-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero .btn-white {
-            background: #fff;
-            color: var(--skyblue-dark);
-            border: none;
-        }
-        .hero .btn-white:hover {
-            background: rgba(255,255,255,0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        }
-
-        .hero .btn-outline-white {
-            background: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-        }
-        .hero .btn-outline-white:hover {
-            background: #fff;
-            color: var(--skyblue-dark);
-        }
+        .hero .meaning { font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-bottom: 8px; font-weight: 300; letter-spacing: 2px; }
+        .hero p { font-size: 1.2rem; color: rgba(255,255,255,0.95); max-width: 600px; margin: 16px auto 32px; }
+        .hero .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .hero .btn-white { background: #fff; color: var(--skyblue-dark); border: none; }
+        .hero .btn-white:hover { background: rgba(255,255,255,0.9); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .hero .btn-outline-white { background: transparent; border: 2px solid #fff; color: #fff; }
+        .hero .btn-outline-white:hover { background: #fff; color: var(--skyblue-dark); }
 
         /* ===== FEATURES ===== */
-        .features {
-            padding: 60px 0;
-            background: var(--bg);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 40px;
-        }
+        .features { padding: 40px 0; background: var(--bg); }
+        .section-title { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; }
         .section-title span { color: var(--skyblue-dark); }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
-
         .feature-card {
             background: var(--bg2);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px 20px;
+            padding: 24px 16px;
             text-align: center;
             transition: 0.3s;
             border-bottom: 4px solid var(--skyblue);
         }
-        .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 32px var(--skyblue-glow);
-            border-color: var(--skyblue-dark);
-        }
-        .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .feature-card p { font-size: 0.9rem; color: var(--text2); }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: 0 8px 32px var(--skyblue-glow); border-color: var(--skyblue-dark); }
+        .feature-card h3 { font-size: 1rem; margin-bottom: 6px; }
+        .feature-card p { font-size: 0.85rem; color: var(--text2); }
 
         /* ===== HOW IT WORKS ===== */
-        .how-it-works {
-            padding: 60px 0;
-            background: var(--bg2);
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
-            margin-top: 32px;
-        }
-
-        .step {
-            text-align: center;
-            background: var(--bg);
-            padding: 24px 16px;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            transition: 0.3s;
-        }
+        .how-it-works { padding: 40px 0; background: var(--bg2); }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin-top: 24px; }
+        .step { text-align: center; background: var(--bg); padding: 20px 16px; border-radius: var(--radius); border: 1px solid var(--border); transition: 0.3s; }
         .step:hover { border-color: var(--skyblue-dark); box-shadow: 0 8px 32px var(--skyblue-glow); }
-
-        .step .num {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--skyblue-dark);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 0 auto 12px;
-        }
-        .step h4 { font-size: 1rem; margin-bottom: 6px; }
-        .step p { font-size: 0.85rem; color: var(--text2); }
+        .step .num { width: 44px; height: 44px; border-radius: 50%; background: var(--skyblue-dark); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; margin: 0 auto 10px; }
+        .step h4 { font-size: 0.95rem; margin-bottom: 4px; }
+        .step p { font-size: 0.8rem; color: var(--text2); }
 
         /* ===== CALCULATOR ===== */
-        .calculator {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #87CEEB 0%, #00BFFF 50%, #1e90ff 100%);
-            color: #fff;
-        }
-
+        .calculator { padding: 40px 0; background: linear-gradient(135deg, #87CEEB 0%, #00BFFF 50%, #1e90ff 100%); color: #fff; }
         .calculator .section-title { color: #fff; }
         .calculator .section-title span { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); }
-
-        .calc-box {
-            max-width: 500px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: var(--radius);
-            padding: 32px 24px;
-            text-align: center;
-        }
-
+        .calc-box { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius); padding: 28px 20px; text-align: center; }
         .calc-box label { font-weight: 600; color: #fff; display: block; margin-bottom: 8px; }
-
-        .calc-box input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: var(--radius2);
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            font-size: 1.2rem;
-            text-align: center;
-            outline: none;
-            margin: 8px 0 16px;
-        }
+        .calc-box input { width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius2); background: rgba(255,255,255,0.15); color: #fff; font-size: 1.1rem; text-align: center; outline: none; margin: 8px 0 14px; }
         .calc-box input:focus { border-color: #fff; }
-
-        .calc-result {
-            font-size: 1.1rem;
-            padding: 16px;
-            background: rgba(255,255,255,0.1);
-            border-radius: var(--radius2);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .calc-result .amount {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .calc-result .sub { color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+        .calc-result { font-size: 1rem; padding: 14px; background: rgba(255,255,255,0.1); border-radius: var(--radius2); border: 1px solid rgba(255,255,255,0.1); }
+        .calc-result .amount { font-size: 1.8rem; font-weight: 700; color: #fff; }
+        .calc-result .sub { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
 
         /* ===== APP STORE BADGES ===== */
-        .app-badges {
-            padding: 40px 0;
-            background: var(--bg2);
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .app-badges .sub {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 16px;
-        }
-
-        .app-badges .badges {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .app-badges .badge-img {
-            height: 50px;
-            width: auto;
-            transition: 0.3s;
-        }
-        .app-badges .badge-img:hover {
-            transform: translateY(-4px);
-        }
+        .app-badges { padding: 30px 0; background: var(--bg2); text-align: center; border-top: 1px solid var(--border); }
+        .app-badges .sub { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+        .app-badges .badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .app-badges .badge-img { height: 44px; width: auto; transition: 0.3s; }
+        .app-badges .badge-img:hover { transform: translateY(-4px); }
 
         /* ===== FAQ ===== */
-        .faq {
-            padding: 60px 0;
-            background: var(--bg);
-        }
-
+        .faq { padding: 40px 0; background: var(--bg); }
         .faq-list { max-width: 700px; margin: 0 auto; }
-
-        .faq-item {
-            background: var(--bg2);
-            padding: 16px 20px;
-            border-radius: var(--radius2);
-            margin-bottom: 12px;
-            border: 1px solid var(--border);
-            transition: 0.3s;
-        }
+        .faq-item { background: var(--bg2); padding: 14px 18px; border-radius: var(--radius2); margin-bottom: 10px; border: 1px solid var(--border); transition: 0.3s; }
         .faq-item:hover { border-color: var(--skyblue-dark); }
-
-        .faq-item .q {
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .faq-item .q { font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-item .q:hover { color: var(--skyblue-dark); }
-        .faq-item .a {
-            padding-top: 8px;
-            color: var(--text2);
-            display: none;
-        }
+        .faq-item .a { padding-top: 8px; color: var(--text2); display: none; font-size: 0.95rem; }
         .faq-item.open .a { display: block; }
-        .faq-item .toggle {
-            font-size: 1.2rem;
-            color: var(--skyblue-dark);
-            font-weight: 700;
-        }
+        .faq-item .toggle { font-size: 1.2rem; color: var(--skyblue-dark); font-weight: 700; }
+
+        /* ===== TERMS ===== */
+        .terms-page { padding: 40px 20px; }
+        .terms-card { background: var(--bg2); padding: 40px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .terms-card h1 { color: var(--skyblue-dark); font-size: 2rem; margin-bottom: 8px; }
+        .terms-card .last-updated { color: var(--text2); font-size: 0.85rem; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .terms-card h2 { color: var(--skyblue-deep); font-size: 1.3rem; margin-top: 24px; margin-bottom: 10px; }
+        .terms-card h3 { color: var(--text); font-size: 1rem; margin-top: 16px; margin-bottom: 6px; }
+        .terms-card p, .terms-card li { color: var(--text2); margin-bottom: 6px; font-size: 0.95rem; }
+        .terms-card ul { padding-left: 20px; margin-bottom: 12px; }
+        .terms-card .highlight-box { background: var(--bg); padding: 14px 18px; border-radius: var(--radius2); border-left: 4px solid var(--skyblue-dark); margin: 12px 0; }
+
+        /* ===== CONTACT ===== */
+        .contact-page { padding: 40px 20px; }
+        .contact-card { background: var(--bg2); padding: 40px; border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        .contact-card h1 { color: var(--skyblue-dark); font-size: 2rem; margin-bottom: 4px; }
+        .contact-card .subtitle { color: var(--text2); font-size: 1rem; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .contact-item { background: var(--bg); padding: 14px 18px; border-radius: var(--radius2); margin-bottom: 12px; border-left: 4px solid var(--skyblue-dark); transition: 0.3s; }
+        .contact-item:hover { transform: translateX(4px); }
+        .contact-item strong { color: var(--skyblue-deep); display: block; font-size: 0.95rem; }
+        .contact-item p, .contact-item a { color: var(--text2); font-size: 0.9rem; text-decoration: none; }
+        .contact-item a:hover { color: var(--skyblue-dark); text-decoration: underline; }
+        .support-form input, .support-form textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius2); font-size: 0.9rem; margin-bottom: 10px; font-family: var(--font); transition: 0.3s; }
+        .support-form input:focus, .support-form textarea:focus { border-color: var(--skyblue-dark); outline: none; box-shadow: 0 0 0 3px var(--skyblue-glow); }
+        .support-form textarea { min-height: 100px; resize: vertical; }
+        .support-form .btn { width: 100%; }
 
         /* ===== FOOTER ===== */
-        .footer {
-            padding: 40px 0 20px;
-            border-top: 3px solid var(--skyblue);
-            background: var(--bg2);
-            text-align: center;
-        }
-
-        .footer .links {
-            display: flex;
-            gap: 24px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .footer .links a {
-            color: var(--text2);
-            font-size: 0.85rem;
-            text-decoration: none;
-        }
+        .footer { padding: 30px 0 16px; border-top: 3px solid var(--skyblue); background: var(--bg2); text-align: center; margin-top: 20px; }
+        .footer .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+        .footer .links a { color: var(--text2); font-size: 0.8rem; text-decoration: none; cursor: pointer; }
         .footer .links a:hover { color: var(--skyblue-dark); }
-        .footer .copy { font-size: 0.8rem; color: var(--text2); }
+        .footer .copy { font-size: 0.75rem; color: var(--text2); }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .hero p { font-size: 1rem; }
-            .nav-links { gap: 12px; }
+            .nav-links { gap: 10px; }
             .nav-links a { font-size: 0.8rem; }
             .btn { padding: 8px 16px; font-size: 0.8rem; }
             .section-title { font-size: 1.5rem; }
             .features-grid { grid-template-columns: 1fr; }
             .steps { grid-template-columns: 1fr; }
+            .terms-card { padding: 20px; }
+            .contact-card { padding: 20px; }
         }
-
         @media (max-width: 480px) {
             .header .container { flex-direction: column; gap: 8px; }
-            .hero { padding: 40px 0; }
+            .hero { padding: 40px 0 30px; }
             .hero .cta-group { flex-direction: column; align-items: center; }
-            .calc-box { padding: 20px 16px; }
+            .calc-box { padding: 16px; }
+            .nav-links { justify-content: center; }
         }
     </style>
 </head>
@@ -443,203 +298,312 @@
     <!-- ===== HEADER ===== -->
     <header class="header">
         <div class="container">
-            <div class="logo"> <span>SGF</span> Wallet</div>
+            <div class="logo" onclick="showPage('home')">
+                <!-- Leaf SVG -->
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                <span>SGF</span> Wallet
+            </div>
             <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#calculator">Calculator</a>
-                <a href="#faq">FAQ</a>
+                <a class="active" onclick="showPage('home')" id="navHome">Home</a>
+                <a onclick="showPage('terms')" id="navTerms">Terms</a>
+                <a onclick="showPage('contact')" id="navContact">Contact</a>
                 <a href="https://sgf-wallet.railway.app" class="btn btn-primary">Get Started</a>
             </nav>
         </div>
     </header>
 
-    <!-- ===== HERO � SKYBLUE ===== -->
-    <section class="hero">
-        <div class="container">
-            <span class="badge"> Seed Growth Funds</span>
-            <span class="hero-icon"></span>
-            <h1>
-                Grow Your Money<br>
-                <span class="highlight">2% Every Day</span>
-            </h1>
-            <div class="meaning"> Seed  Growth  Funds</div>
-            <p>Your money earns daily growth with no trading required. Start earning from day one.</p>
-            <div class="cta-group">
-                <a href="https://sgf-wallet.railway.app" class="btn btn-white">Start Growing Now</a>
-                <a href="#how-it-works" class="btn btn-outline-white">Learn More </a>
-            </div>
-        </div>
-    </section>
+    <!-- ===== HOME ===== -->
+    <div class="page active" id="page-home">
 
-    <!-- ===== FEATURES ===== -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Why <span>SGF Wallet</span>?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
+        <section class="hero">
+            <div class="container">
+                <span class="badge">🌱 Seed Growth Funds</span>
+                <span class="hero-icon">
+                    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
                     </svg>
-                    <h3>2% Daily Growth</h3>
-                    <p>Your money earns every single day.</p>
-                </div>
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <polyline points="17 1 21 5 17 9"/>
-                        <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-                        <polyline points="7 23 3 19 7 15"/>
-                        <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-                    </svg>
-                    <h3>Free Transfers</h3>
-                    <p>Send money with zero fees.</p>
-                </div>
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                        <line x1="1" y1="10" x2="23" y2="10"/>
-                    </svg>
-                    <h3>Instant Withdrawals</h3>
-                    <p>To any bank.</p>
-                </div>
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    <h3>2FA Security</h3>
-                    <p>Your account is protected.</p>
-                </div>
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <h3>Referral Bonuses</h3>
-                    <p>Earn when friends join.</p>
-                </div>
-                <div class="feature-card">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                        <line x1="12" y1="18" x2="12.01" y2="18"/>
-                    </svg>
-                    <h3>Mobile-First</h3>
-                    <p>Works on any phone.</p>
+                </span>
+                <h1>Grow Your Money<br><span class="highlight">2% Every Day</span></h1>
+                <div class="meaning">🌱 Seed → Growth → Funds</div>
+                <p>Your money earns daily growth with no trading required. Start earning from day one.</p>
+                <div class="cta-group">
+                    <a href="https://sgf-wallet.railway.app" class="btn btn-white">Start Growing Now</a>
+                    <a href="#how-it-works" class="btn btn-outline-white" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">Learn More ↓</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ===== HOW IT WORKS ===== -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It <span>Works</span></h2>
-            <div class="steps">
-                <div class="step"><div class="num">1</div><h4>Create Account</h4><p>Sign up in 2 minutes.</p></div>
-                <div class="step"><div class="num">2</div><h4>Deposit Funds</h4><p>Transfer to your virtual account.</p></div>
-                <div class="step"><div class="num">3</div><h4>Watch It Grow</h4><p>Your balance grows every single day.</p></div>
-                <div class="step"><div class="num">4</div><h4>Withdraw Anytime</h4><p>Transfer to your bank instantly.</p></div>
-            </div>
-        </div>
-    </section>
+        <!-- FEATURES WITH SVG ICONS -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Why <span>SGF Wallet</span>?</h2>
+                <div class="features-grid">
 
-    <!-- ===== CALCULATOR ===== -->
-    <section class="calculator" id="calculator">
-        <div class="container">
-            <h2 class="section-title">See Your <span>Growth</span></h2>
-            <div class="calc-box">
-                <label>Enter Amount ()</label>
-                <input type="number" id="calcAmount" value="10000" min="100" step="100">
-                <div class="calc-result">
-                    <div>After 30 Days</div>
-                    <div class="amount" id="calcResult">18,113</div>
-                    <div class="sub">That's <span id="calcPercent">81%</span> growth! </div>
-                </div>
-                <div style="margin-top:12px;font-size:0.8rem;color:rgba(255,255,255,0.7);">
-                    2% daily growth on principal
-                </div>
-            </div>
-        </div>
-    </section>
+                    <!-- 1. Growth -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                        <h3>2% Daily Growth</h3>
+                        <p>Your money earns every single day.</p>
+                    </div>
 
-    <!-- ===== APP STORE BADGES ===== -->
-    <section class="app-badges">
-        <div class="container">
-            <div class="sub"> BYE FEES. HI VIRTUAL ACCOUNT.</div>
-            <div class="badges">
-                <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px;">
-                    <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
-                    <text x="60" y="55" font-family="Arial" font-size="24" fill="#ffffff" font-weight="bold">GET IT ON</text>
-                    <text x="50" y="100" font-family="Arial" font-size="32" fill="#ffffff" font-weight="bold">Google Play</text>
-                    <polygon points="35,30 45,50 25,50" fill="#ffffff"/>
-                    <polygon points="35,120 45,100 25,100" fill="#ffffff"/>
-                    <rect x="20" y="45" width="30" height="60" fill="#ffffff" rx="4"/>
-                    <circle cx="35" cy="45" r="5" fill="#0a0a0a"/>
-                </svg>
+                    <!-- 2. Transfer -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <polyline points="17 1 21 5 17 9"/>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                            <polyline points="7 23 3 19 7 15"/>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+                        </svg>
+                        <h3>Free Transfers</h3>
+                        <p>Send money with zero fees.</p>
+                    </div>
 
-                <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px;">
-                    <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
-                    <text x="60" y="55" font-family="Arial" font-size="20" fill="#ffffff" font-weight="bold">Download on the</text>
-                    <text x="50" y="100" font-family="Arial" font-size="36" fill="#ffffff" font-weight="bold">App Store</text>
-                    <rect x="20" y="40" width="35" height="70" rx="8" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
-                    <circle cx="37.5" cy="50" r="5" fill="#0a0a0a"/>
-                </svg>
-            </div>
-        </div>
-    </section>
+                    <!-- 3. Withdraw -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                        <h3>Instant Withdrawals</h3>
+                        <p>To any bank.</p>
+                    </div>
 
-    <!-- ===== FAQ ===== -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="q"><span>What is SGF Wallet?</span><span class="toggle">+</span></div>
-                    <div class="a">SGF (Seed Growth Funds) Wallet is a savings and investment platform that helps you grow your money with 2% daily returns. You can deposit, transfer, and withdraw funds � all from your phone.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="q"><span>How does the 2% daily growth work?</span><span class="toggle">+</span></div>
-                    <div class="a">Your principal balance earns 2% growth every single day. No trading, no hidden fees � just simple, transparent growth.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="q"><span>Is my money safe?</span><span class="toggle">+</span></div>
-                    <div class="a">Yes! Your funds are held securely via Korapay, a licensed payment provider. We use 2FA, PIN protection, and encryption to keep your account secure.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="q"><span>Can I withdraw anytime?</span><span class="toggle">+</span></div>
-                    <div class="a">Yes! You can withdraw your funds to any bank account anytime. A small 1.5% platform fee applies.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="q"><span>How do I refer friends?</span><span class="toggle">+</span></div>
-                    <div class="a">Share your unique referral code. When your friend signs up and makes their first deposit, you earn 5% of their deposit as a bonus.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="q"><span>Is SGF Wallet available on mobile?</span><span class="toggle">+</span></div>
-                    <div class="a">Yes! SGF Wallet is fully responsive and works on any smartphone. A dedicated mobile app is coming soon.</div>
+                    <!-- 4. Security -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <h3>2FA Security</h3>
+                        <p>Your account is protected.</p>
+                    </div>
+
+                    <!-- 5. Referral -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                        <h3>Referral Bonuses</h3>
+                        <p>Earn when friends join.</p>
+                    </div>
+
+                    <!-- 6. Mobile -->
+                    <div class="feature-card">
+                        <svg class="icon-svg" viewBox="0 0 24 24">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        </svg>
+                        <h3>Mobile-First</h3>
+                        <p>Works on any phone.</p>
+                    </div>
+
                 </div>
             </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It <span>Works</span></h2>
+                <div class="steps">
+                    <div class="step"><div class="num">1</div><h4>Create Account</h4><p>Sign up in 2 minutes.</p></div>
+                    <div class="step"><div class="num">2</div><h4>Deposit Funds</h4><p>Transfer to your virtual account.</p></div>
+                    <div class="step"><div class="num">3</div><h4>Watch It Grow</h4><p>Your balance grows every single day.</p></div>
+                    <div class="step"><div class="num">4</div><h4>Withdraw Anytime</h4><p>Transfer to your bank instantly.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALCULATOR -->
+        <section class="calculator" id="calculator">
+            <div class="container">
+                <h2 class="section-title">See Your <span>Growth</span></h2>
+                <div class="calc-box">
+                    <label>Enter Amount (₦)</label>
+                    <input type="number" id="calcAmount" value="10000" min="100" step="100">
+                    <div class="calc-result">
+                        <div>After 30 Days</div>
+                        <div class="amount" id="calcResult">₦18,113</div>
+                        <div class="sub">That's <span id="calcPercent">81%</span> growth! 🚀</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:0.75rem;color:rgba(255,255,255,0.7);">2% daily growth on principal</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- APP STORE BADGES -->
+        <section class="app-badges">
+            <div class="container">
+                <div class="sub">📱 BYE FEES. HI VIRTUAL ACCOUNT.</div>
+                <div class="badges">
+                    <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px; height:44px;">
+                        <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
+                        <text x="60" y="55" font-family="Arial" font-size="24" fill="#ffffff" font-weight="bold">GET IT ON</text>
+                        <text x="50" y="100" font-family="Arial" font-size="32" fill="#ffffff" font-weight="bold">Google Play</text>
+                        <polygon points="35,30 45,50 25,50" fill="#ffffff"/>
+                        <polygon points="35,120 45,100 25,100" fill="#ffffff"/>
+                        <rect x="20" y="45" width="30" height="60" fill="#ffffff" rx="4"/>
+                        <circle cx="35" cy="45" r="5" fill="#0a0a0a"/>
+                    </svg>
+                    <svg class="badge-img" viewBox="0 0 512 152" style="background:#0a0a0a; border-radius:8px; padding:4px 12px; height:44px;">
+                        <rect width="512" height="152" rx="8" fill="#0a0a0a"/>
+                        <text x="60" y="55" font-family="Arial" font-size="20" fill="#ffffff" font-weight="bold">Download on the</text>
+                        <text x="50" y="100" font-family="Arial" font-size="36" fill="#ffffff" font-weight="bold">App Store</text>
+                        <rect x="20" y="40" width="35" height="70" rx="8" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
+                        <circle cx="37.5" cy="50" r="5" fill="#0a0a0a"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                <div class="faq-list">
+                    <div class="faq-item"><div class="q"><span>What is SGF Wallet?</span><span class="toggle">+</span></div><div class="a">SGF (Seed Growth Funds) Wallet is a savings and investment platform that helps you grow your money with 2% daily returns.</div></div>
+                    <div class="faq-item"><div class="q"><span>How does the 2% daily growth work?</span><span class="toggle">+</span></div><div class="a">Your principal balance earns 2% growth every single day. No trading, no hidden fees — just simple, transparent growth.</div></div>
+                    <div class="faq-item"><div class="q"><span>Is my money safe?</span><span class="toggle">+</span></div><div class="a">Yes! Your funds are held securely via Korapay, a licensed payment provider. We use 2FA, PIN protection, and encryption.</div></div>
+                    <div class="faq-item"><div class="q"><span>Can I withdraw anytime?</span><span class="toggle">+</span></div><div class="a">Yes! You can withdraw your funds to any bank account anytime. A small 1.5% platform fee applies.</div></div>
+                    <div class="faq-item"><div class="q"><span>How do I refer friends?</span><span class="toggle">+</span></div><div class="a">Share your unique referral code. When your friend signs up and makes their first deposit, you earn 5% of their deposit as a bonus.</div></div>
+                    <div class="faq-item"><div class="q"><span>Is SGF Wallet available on mobile?</span><span class="toggle">+</span></div><div class="a">Yes! SGF Wallet is fully responsive and works on any smartphone. A dedicated mobile app is coming soon.</div></div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /page-home -->
+
+    <!-- ===== TERMS ===== -->
+    <div class="page" id="page-terms">
+        <div class="container terms-page">
+            <div class="terms-card">
+                <h1>📜 Terms & Privacy</h1>
+                <div class="last-updated">📅 Last updated: July 17, 2026</div>
+
+                <h2>1. Terms of Service</h2>
+                <p>By using SGF Wallet ("the Platform"), you agree to these terms:</p>
+                <ul>
+                    <li>✅ You must be <strong>18 years or older</strong> to use this platform.</li>
+                    <li>✅ You are responsible for keeping your <strong>PIN and account secure</strong>.</li>
+                    <li>✅ All transactions are <strong>final and irreversible</strong>.</li>
+                    <li>✅ SGF Wallet reserves the right to <strong>suspend accounts</strong> for suspicious activity.</li>
+                </ul>
+
+                <h2>2. Privacy Policy</h2>
+                <h3>What We Collect:</h3>
+                <ul>
+                    <li>📧 Email address</li>
+                    <li>📱 Phone number</li>
+                    <li>👤 Username</li>
+                    <li>📋 BVN (for KYC – <strong>NEVER stored</strong>)</li>
+                    <li>📋 NIN (for KYC – <strong>NEVER stored</strong>)</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>🔒 Important:</strong> Your BVN and NIN are passed directly to <strong>Korapay</strong> for KYC verification and are <strong>NEVER stored</strong> in our database.
+                </div>
+
+                <h3>Data Security:</h3>
+                <ul>
+                    <li>🔐 All data is <strong>encrypted</strong> in transit and at rest</li>
+                    <li>🔐 2FA (Two-Factor Authentication) is available</li>
+                    <li>🔐 PINs are <strong>hashed</strong> using bcrypt</li>
+                </ul>
+
+                <h2>3. Disclaimer</h2>
+                <p>SGF Wallet is a savings and investment platform. While we guarantee <strong>2% daily growth on principal</strong>, this is not financial advice. Always invest wisely.</p>
+
+                <h2>4. Contact Us</h2>
+                <p>If you have any questions, please <a onclick="showPage('contact')" style="color:var(--skyblue-dark);cursor:pointer;">contact us</a>.</p>
+
+                <p style="margin-top:30px;text-align:center;color:var(--text2);">🌱 SGF Wallet — Seed Growth Funds. Grow Your Money, 2% Every Day.</p>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <!-- ===== CONTACT ===== -->
+    <div class="page" id="page-contact">
+        <div class="container contact-page">
+            <div class="contact-card">
+                <h1>📞 Contact & Support</h1>
+                <div class="subtitle">We're here to help you!</div>
+
+                <div class="contact-item">
+                    <strong>📧 Email Support</strong>
+                    <a href="mailto:support@sgfwallet.com">support@sgfwallet.com</a>
+                    <p>📅 Response time: 24 hours</p>
+                </div>
+
+                <div class="contact-item">
+                    <strong>💬 Live Chat</strong>
+                    <p>🚀 Coming soon! We're building a live chat feature for instant support.</p>
+                </div>
+
+                <div class="contact-item">
+                    <strong>🐦 Twitter/X</strong>
+                    <a href="https://twitter.com/sgfwallet">@sgfwallet</a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>📱 WhatsApp</strong>
+                    <a href="https://wa.me/2348000000000">+234 800 000 0000</a>
+                </div>
+
+                <hr style="border:1px solid var(--border);margin:24px 0;">
+
+                <h2 style="color:var(--skyblue-deep);font-size:1.2rem;margin-bottom:12px;">📋 Report an Issue</h2>
+                <div class="support-form">
+                    <form id="supportForm" action="mailto:support@sgfwallet.com" method="POST" enctype="text/plain">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="text" name="subject" placeholder="Subject">
+                        <textarea name="message" placeholder="Describe your issue..." required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+
+                <p style="margin-top:24px;text-align:center;color:var(--text2);">🌱 SGF Wallet — Seed Growth Funds. Grow Your Money, 2% Every Day.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container">
             <div class="links">
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('terms')">Terms & Privacy</a>
+                <a onclick="showPage('contact')">Contact & Support</a>
                 <a href="https://sgf-wallet.railway.app">App</a>
-                <a href="#features">Features</a>
-                <a href="#calculator">Calculator</a>
-                <a href="#faq">FAQ</a>
-                <a href="mailto:support@sgfwallet.com">Support</a>
             </div>
-            <p class="copy"> SGF Wallet � Seed Growth Funds. Grow Your Money, 2% Every Day.</p>
-            <p class="copy" style="margin-top:4px;">� 2026 SGF Wallet. All rights reserved.</p>
+            <p class="copy">🌱 SGF Wallet — Seed Growth Funds. Grow Your Money, 2% Every Day.</p>
+            <p class="copy" style="margin-top:4px;">© 2026 SGF Wallet. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- ===== JAVASCRIPT ===== -->
     <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            const navMap = { home: 'navHome', terms: 'navTerms', contact: 'navContact' };
+            if (navMap[pageId]) {
+                document.getElementById(navMap[pageId]).classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         const calcAmount = document.getElementById('calcAmount');
         const calcResult = document.getElementById('calcResult');
         const calcPercent = document.getElementById('calcPercent');
@@ -651,10 +615,9 @@
             let balance = principal;
             for (let i = 0; i < days; i++) balance += balance * rate;
             const percent = principal > 0 ? ((balance - principal) / principal * 100).toFixed(0) : 0;
-            calcResult.textContent = `${balance.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+            calcResult.textContent = `₦${balance.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
             calcPercent.textContent = `${percent}%`;
         }
-
         calcAmount.addEventListener('input', calculateGrowth);
         calculateGrowth();
 
@@ -677,7 +640,9 @@
             });
         });
 
-        console.log(' SGF Wallet � Seed Growth Funds. Skyblue Edition!');
+        console.log('🌱 SGF Wallet — Marketing Site Loaded!');
+        console.log('🎨 All SVG icons restored!');
     </script>
+
 </body>
 </html>
